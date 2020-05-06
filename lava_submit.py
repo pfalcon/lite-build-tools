@@ -36,6 +36,7 @@ def submit_testjob(jobdef):
             "definition": jobdef,
             "backend": urlsplit(lava_uri).netloc  # qa-reports backends are named as lava instances
         }
+        print("POST:", qa_server_api, data)
         results = requests.post(qa_server_api, data=data, headers=headers)
         if results.status_code < 300:
             print("%s/testjob/%s" % (qa_server_uri, results.text))
