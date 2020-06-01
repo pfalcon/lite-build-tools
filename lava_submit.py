@@ -21,7 +21,13 @@ def submit_testjob(jobdef):
         qa_server_uri = os.getenv("QA_SERVER")
         qa_server_group = os.getenv("QA_SERVER_GROUP")
         qa_server_project = os.getenv("QA_SERVER_PROJECT")
-        qa_server_build = os.getenv("GIT_COMMIT_ID")
+        qa_server_build = os.getenv("EXTERNAL_BUILD_ID")
+        if qa_server_build is None:
+            print(
+                "Warning: EXTERNAL_BUILD_ID environment variable is not set, "
+                "using GIT_COMMIT_ID instead."
+            )
+            qa_server_build = os.getenv("GIT_COMMIT_ID")
         qa_server_env = os.getenv("PLATFORM")
         qa_server_api = "%s/api/submitjob/%s/%s/%s/%s" % (
             qa_server_uri,
