@@ -67,7 +67,7 @@ def process_selector(struct, sel):
             key = int(lex.match_re("[0-9]+"))
             assert lex.match("]")
         elif lex.match(".") or key is None:
-            key = lex.match_re("[a-zA-Z0-9_]+")
+            key = lex.match_re("[-a-zA-Z0-9_]+")
             assert key
         else:
             assert 0, "Expected one of operators: '.[='"
